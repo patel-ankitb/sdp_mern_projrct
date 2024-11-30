@@ -1,6 +1,6 @@
 const roleSchema = require('../models/roleModel')
 
-
+//---------------------------- CREATE ROLE --------------------------------------------------------
 
 const createRole = async (req, res) => {
 
@@ -17,6 +17,8 @@ const createRole = async (req, res) => {
     }
 }
 
+//---------------------------------------- GET ALL ROLE --------------------------------------------
+
 const getRole = async(req,res) => {
     try {
         
@@ -32,6 +34,7 @@ const getRole = async(req,res) => {
     }
 }
 
+//--------------------------------------------- ALL exports model -------------------------------------------------
 
 module.exports = {
     createRole,

@@ -8,7 +8,7 @@ dotenv.config({
 module.exports = {
     NODE_ENV : process.env.NODE_ENV || 'development',
     HOST : process.env.HOST || 'localhost',
-    PORT : process.env.PORT || 3003,
+    PORT : process.env.PORT || 3001,
     DB_URL: process.env.DB_URL || 'mongodb://127.0.0.1/sdp_development',
-    JWT_SECRET: process.env.JWT_SECRET || 'secret',
+    JWT_SECRET: process.env.JWT_SECRET || 'ankit',
 }

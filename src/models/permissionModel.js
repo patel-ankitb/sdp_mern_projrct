@@ -17,8 +17,8 @@ const permissionSchema = new Schema({
         default: 'active'
     }
 },{
-    timeseries:true
+    timestamps:true
 })
 
 
-module.exports = mongoose.model('permission',permissionSchema)
+module.exports = mongoose.model('Permission',permissionSchema)

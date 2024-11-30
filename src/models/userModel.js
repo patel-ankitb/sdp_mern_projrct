@@ -45,7 +45,7 @@ const userSchema = new Schema({
         type:Date
     },
 },{
-    timeseries:true
+    timestamps:true
 })
 
 module.exports = mongoose.model('user',userSchema)

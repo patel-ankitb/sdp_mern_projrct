@@ -1,10 +1,28 @@
-const userSchema = require('../models/userModel')
+const userSchema = require('../models/userModel');
+const { encryptpassword } = require('../utils/encryptUser');
+const tokenutil = require('../utils/tokenUser')
+const encrypt = require('../utils/encryptUser');
 
 //--------------------------------create user --------------------------------------------------------------
 
 const createUser = async (req, res) => {
+
+    const hashedpassword = await encrypt.encryptpassword(req.body.password);
     try {
-        const createUser = await userSchema.create(req.body);
+        const userobj = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: hashedpassword,
+            role: req.body.role,
+            department: req.body.department,
+            contact: req.body.contact,
+            employmentStatus: req.body.employmentStatus,
+            joiningDate: req.body.joiningDate,
+            terminationDate: req.body.terminationDate
+
+        }
+        const createUser = await userSchema.create(userobj);
         res.status(400).json({
             mess: "user create successfully !! ",
             data: createUser
@@ -63,7 +81,7 @@ const updateUser = async (req, res) => {
         }
     } catch (err) {
         res.status(500).json({
-            message: "Internal server error"
+            message: "not user update....."
         })
     }
 
@@ -72,24 +90,59 @@ const updateUser = async (req, res) => {
 
 //--------------------------------- get all user -----------------------------------------------------
 
-const getUser = async(req,res) => {
+const getUser = async (req, res) => {
     try {
         const users = await userSchema.find()
         res.status(400).json({
-            mess:"all user fetched...",
-            data:users
+            mess: "all user fetched...",
+            data: users
         })
     } catch (err) {
         res.status(500).json({
-            message: "Internal server error"
+            message: "not user ...."
+        })
+    }
+}
+
+//----------------------------------------login user ------------------------------------------------------
+
+
+const loginUser = async (req, res) => {
+    const useremail = req.body.email;
+    const userpassword = req.body.password;
+    const loginUser = await userSchema.findOne({ email: useremail });
+
+    if (useremail) {
+        const isMatch = await encrypt.comparepassword(
+            userpassword,
+            loginUser.password
+        );
+        if (isMatch) {
+            const token = tokenutil.genratetoken(loginUser.toObject());
+            res.status(400).json({
+                mess: "user login in successfully !!! ",
+                token: token
+            })
+        } else {
+            res.status(400).json({
+                mess: "invalid password "
+            })
+        }
+    }else{
+        res.status(400).json({
+            mess:"user not found ... "
         })
     }
 }
 
 
-module.exports={
+
+//--------------------------------------------- ALL exports model -------------------------------------------------
+
+module.exports = {
     createUser,
     deleteUser,
     updateUser,
-    getUser
+    getUser,
+    loginUser
 }

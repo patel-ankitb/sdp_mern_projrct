@@ -9,7 +9,7 @@ const roleSchema = new Schema({
     },
     Permissions:[{
         type:Schema.Types.ObjectId,
-        ref:'permission'
+        ref:'Permission'
     }],
     status:{
         type: String,
@@ -17,7 +17,7 @@ const roleSchema = new Schema({
         default: 'active'
     }
 },{
-    timeseries:true
+    timestamps:true
 })
 
 module.exports = mongoose.model('Role',roleSchema);

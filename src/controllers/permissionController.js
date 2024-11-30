@@ -1,6 +1,6 @@
 const permissionSchema = require('../models/permissionModel')
 
-
+//----------------------------------CREATE PERMISSION ------------------------------------------
 const createPermission = async (req, res) => {
 
     try {
@@ -15,7 +15,7 @@ const createPermission = async (req, res) => {
         })
     }
 }
-
+//---------------------------DELETE PERMISSION -------------------------------------------
 
 const deletePermission = async (req, res) => {
     try {
@@ -38,6 +38,8 @@ const deletePermission = async (req, res) => {
         })
     }
 }
+
+//------------------------------------- UPDATE PERMISSION ------------------------------------
 
 const upadtePermission = async(req,res) => { 
 
@@ -64,6 +66,7 @@ const upadtePermission = async(req,res) => {
     }
 }
 
+//------------------------------------------- GET ALL PERMISSION ---------------------------------------------
 const getPermission = async(req,res) => {
     try {
         const permission = await permissionSchema.find({status:"active"})
@@ -78,6 +81,8 @@ const getPermission = async(req,res) => {
     }
 }
 
+
+//--------------------------------------------- ALL exports model -------------------------------------------------
 module.exports ={
     createPermission,
     deletePermission,

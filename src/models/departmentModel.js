@@ -13,7 +13,7 @@ const departmentSchema = new Schema({
         default: 'active'
     }
 },{
-    timeseries:true
+    timestamps:true
 })
 
 module.exports = mongoose.model('Department',departmentSchema)

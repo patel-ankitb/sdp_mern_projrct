@@ -1,7 +1,7 @@
 const departmentSchema = require('../models/departmentModel')
 
 
-
+//---------------------------- CREATE DEPARTMENT --------------------------------------------------------
 
 const createDepartment = async (req, res) => {
     try {
@@ -20,6 +20,7 @@ const createDepartment = async (req, res) => {
     }
 }
 
+//-----------------------------------GET ALL DEPARTMENT ---------------------------------------------------
 
 const getDepartment = async (req, res) => {
     try {
